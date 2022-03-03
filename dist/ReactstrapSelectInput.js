@@ -1,8 +1,7 @@
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 import * as React from 'react';
 import { FormFeedback, FormGroup, Input, Label } from "reactstrap";
-
 /*let handleBlur = event => {
     if (this.ignoreNextBlur === true) {
         // The parent components are relying on the bubbling of the event.
@@ -13,55 +12,39 @@ import { FormFeedback, FormGroup, Input, Label } from "reactstrap";
     }
 };*/
 
-var ReactstrapSelectInput = function ReactstrapSelectInput(_ref) {
-    var field = _ref.field,
-        _ref$form = _ref.form,
-        isSubmitting = _ref$form.isSubmitting,
-        touched = _ref$form.touched,
-        errors = _ref$form.errors,
-        _ref$disabled = _ref.disabled,
-        disabled = _ref$disabled === undefined ? false : _ref$disabled,
-        props = _objectWithoutProperties(_ref, ["field", "form", "disabled"]);
-
-    var error = errors[field.name];
-    var touch = touched[field.name];
-    return React.createElement(
-        FormGroup,
-        null,
-        React.createElement(
-            Label,
-            { "for": props.inputprops.id, className: "label-color" },
-            props.label
-        ),
-        React.createElement(
-            Input,
-            Object.assign({ id: props.inputprops.id }, field, props, { type: "select",
-                invalid: Boolean(touched[field.name] && errors[field.name]),
-                placeholder: "Test" }),
-            React.createElement(
-                "option",
-                { value: "" },
-                props.inputprops.defaultOption
-            ),
-            props.inputprops.options.map(function (option, index) {
-                if (option.name) return React.createElement(
-                    "option",
-                    { value: option.id, key: index },
-                    option.name
-                );
-                return React.createElement(
-                    "option",
-                    { value: option, key: index },
-                    option
-                );
-            })
-        ),
-        touch && error && React.createElement(
-            FormFeedback,
-            null,
-            error
-        )
-    );
+const ReactstrapSelectInput = ({
+  field,
+  form: {
+    isSubmitting,
+    touched,
+    errors
+  },
+  disabled = false,
+  ...props
+}) => {
+  let error = errors[field.name];
+  let touch = touched[field.name];
+  return /*#__PURE__*/React.createElement(FormGroup, null, /*#__PURE__*/React.createElement(Label, {
+    for: props.inputprops.id,
+    className: "label-color"
+  }, props.label), /*#__PURE__*/React.createElement(Input, _extends({
+    id: props.inputprops.id
+  }, field, props, {
+    type: "select",
+    invalid: Boolean(touched[field.name] && errors[field.name]),
+    placeholder: "Test"
+  }), /*#__PURE__*/React.createElement("option", {
+    value: ""
+  }, props.inputprops.defaultOption), props.inputprops.options.map((option, index) => {
+    if (option.name) return /*#__PURE__*/React.createElement("option", {
+      value: option.id,
+      key: index
+    }, option.name);
+    return /*#__PURE__*/React.createElement("option", {
+      value: option,
+      key: index
+    }, option);
+  })), touch && error && /*#__PURE__*/React.createElement(FormFeedback, null, error));
 };
 
 export default ReactstrapSelectInput;

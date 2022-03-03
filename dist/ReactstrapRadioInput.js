@@ -1,33 +1,32 @@
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 import * as React from 'react';
 import { FormGroup, Input, Label } from "reactstrap";
 
-var ReactstrapRadioInput = function ReactstrapRadioInput(_ref) {
-    var field = _ref.field,
-        _ref$form = _ref.form,
-        isSubmitting = _ref$form.isSubmitting,
-        setFieldValue = _ref$form.setFieldValue,
-        touched = _ref$form.touched,
-        errors = _ref$form.errors,
-        values = _ref$form.values,
-        _ref$disabled = _ref.disabled,
-        disabled = _ref$disabled === undefined ? false : _ref$disabled,
-        props = _objectWithoutProperties(_ref, ["field", "form", "disabled"]);
-
-    return React.createElement(
-        FormGroup,
-        { check: true, inline: true },
-        React.createElement(
-            Label,
-            { "for": props.id },
-            React.createElement(Input, Object.assign({}, props, { type: "radio", name: field.name, checked: values[field.name] === field.value, value: field.value,
-                onChange: function onChange(event, value) {
-                    return setFieldValue(field.name, field.value);
-                } })),
-            props.label
-        )
-    );
+const ReactstrapRadioInput = ({
+  field,
+  form: {
+    isSubmitting,
+    setFieldValue,
+    touched,
+    errors,
+    values
+  },
+  disabled = false,
+  ...props
+}) => {
+  return /*#__PURE__*/React.createElement(FormGroup, {
+    check: true,
+    inline: true
+  }, /*#__PURE__*/React.createElement(Label, {
+    for: props.id
+  }, /*#__PURE__*/React.createElement(Input, _extends({}, props, {
+    type: "radio",
+    name: field.name,
+    checked: values[field.name] === field.value,
+    value: field.value,
+    onChange: (event, value) => setFieldValue(field.name, field.value)
+  })), props.label));
 };
 
 export default ReactstrapRadioInput;
